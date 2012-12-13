@@ -12,6 +12,7 @@ ecstatic     =  require "ecstatic"
 jshtml       =  require path.join(modules, "view.jshtml.plugin.coffee")
 parse        =  require path.join(modules, "parse.plugin.coffee")
 session_helper        =  require path.join(modules, "session_helper.coffee")
+auth_helper = =  require path.join(modules, "auth_helper.coffee")
 
 app = flatiron.app
 app.use flatiron.plugins.http
@@ -60,7 +61,7 @@ app.router.get "/login", ->
     app.render @res, "login", options
 
 app.router.post "/login",  ->
-  session_helper.login app, @req.body.username, @req.body.password, (err,user) =>
+  auth_helper.login app, @req.body.username, @req.body.password, (err,user) =>
     if err
       delete @req.session.user
       session_helper.redirect_with_error_number @req, @res, err, "/login"
