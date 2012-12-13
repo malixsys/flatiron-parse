@@ -11,8 +11,8 @@ ecstatic     =  require "ecstatic"
 #bliss        = require "./lib/view.bliss.plugin.coffee"
 jshtml       =  require path.join(modules, "view.jshtml.plugin.coffee")
 parse        =  require path.join(modules, "parse.plugin.coffee")
-sessions     =  require path.join(modules, "sessions.coffee")
-auths		 =  require path.join(modules, "auths.coffee")
+sessions     =  require path.join(modules, "session_helper.coffee")
+auths		 =  require path.join(modules, "auth_helper.coffee")
 
 app = flatiron.app
 app.use flatiron.plugins.http
