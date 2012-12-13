@@ -1,0 +1,30 @@
+{
+    "name": "flatiron-parse",
+    "version": "0.0.1",
+    "private": true,
+    "engines": {
+        "node": ">= 0.6.10"
+    },
+    "main": "server.js",
+    "dependencies": {
+        "flatiron": "0.3.x",
+        "director": "1.1.x",
+        "resourceful": "0.3.x",
+        "union": "0.3.x",
+        "ecstatic": "0.3.x",
+        "coffee-script": "1.4.x",
+        "jade.plugin": "0.1.x",
+        "bliss": "1.0.x",
+        "jshtml": "0.2.x",
+        "request": "2.12.x",
+        "connect": "2.7.x",
+        "password-hash" : "1.2.x"
+        
+    },
+    "devDependencies": {
+        "assert": "0.4.x"
+    },
+    "scripts": {
+        "start": "node server.js"
+    }
+}

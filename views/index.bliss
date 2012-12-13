@@ -1,0 +1,4 @@
+<div class="hero-unit">
+	<h1 class='welcome'>Welcome<small>this is a test</small></h1>
+	<p>version: @version</p>
+</div>

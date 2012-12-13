@@ -1,0 +1,40 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+@media (max-width: 979px)
+{
+    body
+    {
+        padding-top: 0px !important;
+        padding-bottom: 0px;
+    }
+}
+@media (min-width: 980px)
+{
+    body
+    {
+        padding-top: 40px !important;
+        padding-bottom: 40px;
+    }
+}
+h1,h2,h3,h4,h5,h6 {
+  margin: 10px 0;
+  font-family: 'Raleway';
+  font-weight: normal;
+}
+.navbar .brand, .welcome  {
+  font-family: 'Open Sans';
+}
+h1 small
+{
+    display: block;
+    font-size: 22px;
+    -moz-text-shadow: none;
+    -webkit-text-shadow: none;
+    text-shadow: none;
+    padding: 8px;
+}
+h1.welcome small 
+{
+    padding: 4px 0px 0px 16px;
+}
