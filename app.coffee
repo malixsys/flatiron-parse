@@ -11,8 +11,8 @@ ecstatic     =  require "ecstatic"
 #bliss        = require "./lib/view.bliss.plugin.coffee"
 jshtml       =  require path.join(modules, "view.jshtml.plugin.coffee")
 parse        =  require path.join(modules, "parse.plugin.coffee")
-session_helper        =  require path.join(modules, "session_helper.coffee")
-auth_helper = =  require path.join(modules, "auth_helper.coffee")
+sessions     =  require path.join(modules, "sessions.coffee")
+auths		 =  require path.join(modules, "auths.coffee")
 
 app = flatiron.app
 app.use flatiron.plugins.http
@@ -32,7 +32,7 @@ app.use parse.plugin
   
 app.use jshtml.plugin, 
   dir: "" + __dirname + "/views",
-  ext: '.jshtml'
+  ext: '.jshtml' #.jade .bliss
 
 app.http.before.push ecstatic(
         root: __dirname+'/assets',
@@ -50,28 +50,28 @@ app.http.before.push (req,res) ->
   res.emit 'next'
 
 app.router.get "/",  ->
-  session_helper.view_locals @req, {}, (options) =>
+  sessions.view_locals @req, {}, (options) =>
     app.render @res, 'index', options
     
 app.router.get "/login", ->
-  session_helper.view_locals @req,
+  sessions.view_locals @req,
     title: "login | aZoo.me"
     isLogin: true
   , (options) =>
     app.render @res, "login", options
 
 app.router.post "/login",  ->
-  auth_helper.login app, @req.body.username, @req.body.password, (err,user) =>
+  auths.login app, @req.body.username, @req.body.password, (err,user) =>
     if err
       delete @req.session.user
-      session_helper.redirect_with_error_number @req, @res, err, "/login"
+      sessions.redirect_with_error_number @req, @res, err, "/login"
     else
       @req.session.user = user
-      session_helper.redirect_with_success_number @req, @res, 0, "/"
+      sessions.redirect_with_success_number @req, @res, 0, "/"
 
 app.router.get "/logout",  ->
   delete @req.session.user
-  session_helper.redirect_with_success_number @req, @res, 0, "/"
+  sessions.redirect_with_success_number @req, @res, 0, "/"
 
 port = process.env.PORT or 3000
 host = process.env.IP
