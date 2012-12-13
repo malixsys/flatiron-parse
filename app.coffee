@@ -13,10 +13,14 @@ jshtml       =  require path.join(modules, "view.jshtml.plugin.coffee")
 parse        =  require path.join(modules, "parse.plugin.coffee")
 session_helper        =  require path.join(modules, "session_helper.coffee")
 
+ParamNotSet = (p,n) ->
+    err = new Error("Environment Variable Not Set Error! Set #{p} or pass it in as the #{n} argument")
+    throw err
+
 app = flatiron.app
 app.use flatiron.plugins.http
 
-app.http.before.push cookieParser(process.env.CookieParserSecret) # Set in your Environment...
+app.http.before.push cookieParser(process.env.CookieParserSecret or process.argv[2] or ParamNotSet("CookieParserSecret", "1st")) 
 app.http.before.push session()
 
 #app.use jade.plugin, 

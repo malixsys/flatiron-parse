@@ -165,9 +165,13 @@ class Parse
   noop: (className, object, callback) ->
     callback(null, 'NOOP:' + JSON.stringify(object) )
 
+ParamNotSet = (p,n) ->
+    err = new Error("Environment Variable Not Set Error! Set #{p} or pass it in as the #{n} argument")
+    throw err
+
 attach = (options) ->
   self = this
-  self.parse = new Parse(process.env.ParseApplicationId, process.env.ParseMasterKey) # Set in your environment
+  self.parse = new Parse(process.env.ParseApplicationId or process.argv[3] or ParamNotSet("ParseApplicationId","2nd"), process.env.ParseMasterKey or process.argv[4] or ParamNotSet("ParseMasterKey","3rd")) 
 
 exports.plugin =
   name: "parse.plugin"
